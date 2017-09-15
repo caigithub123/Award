@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>抽奖</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>
+    <script type="text/javascript" src="js/javascript.setfontsize.js"></script>
+</head>
+<body>
+	<div class="index-main">
+        <div class="index-top">
+            <img src="images/top_title.png" alt="" class="">
+            <p>您还有<em class="play-num">1</em>次抽奖机会</p>
+            <a href="javascript:void(0)">规则说明></a>
+        </div>
+        <div class="index-dial" id="lottery">
+            <div class="Box ">
+                <ul class="dial-box">
+                   <li class="lottery-unit lottery-unit-0">
+                        <div class="imgBox"><img src="images/icon2.png" alt=""><p>200积分</p></div>
+                        <div class="gray_bg"></div>
+                        <div class="mask"></div>
+                    </li>
+                    <li class="lottery-unit lottery-unit-1">
+                        <div class="imgBox"><img src="images/icon7.png" alt=""><p>1000现金券</p><em>1000</em></div>
+                        <div class="gray_bg"></div>
+                        <div class="mask"></div>
+                    </li>
+                    <li class="lottery-unit lottery-unit-2">
+                        <div class="imgBox"><img src="images/icon3.png" alt=""><p>300元加油卡</p></div>
+                        <div class="gray_bg"></div>
+                        <div class="mask"></div>
+                    </li>
+                    <li class="lottery-unit lottery-unit-7">
+                        <div class="imgBox"><img src="images/icon4.png" alt=""><p>200积分</p></div>
+                        <div class="gray_bg"></div>
+                        <div class="mask"></div>
+                    </li>
+                    <li class="bagin">
+                        <img src="images/cj_yellow.png" alt="">
+                        <div class="gray_bg"></div>
+                        <div class="mask"></div>
+                    </li>
+                    <li class="lottery-unit lottery-unit-3">
+                        <div class="imgBox"><img src="images/icon5.png" alt=""><p>冰箱</p></div>
+                        <div class="gray_bg"></div>
+                        <div class="mask"></div>
+                    </li>
+                    <li class="lottery-unit lottery-unit-6">
+                        <div class="imgBox"><img src="images/icon6.png" alt=""><p>平板电视</p></div>
+                        <div class="gray_bg"></div>
+                        <div class="mask"></div>
+                    </li>
+                    <li class="lottery-unit lottery-unit-5">
+                        <div class="imgBox"><img src="images/icon7.png" alt=""><p>500现金券</p><em>500</em></div>
+                        <div class="gray_bg"></div>
+                        <div class="mask"></div>
+                    </li>
+                    <li class="lottery-unit lottery-unit-4">
+                        <div class="imgBox"><img src="images/icon1.png" alt=""><p>谢谢参与</p></div>
+                        <div class="gray_bg"></div>
+                        <div class="mask"></div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="prizeUser">
+            <p>中奖用户</p>
+            <div class="ulBox">
+                <ul>
+                    <li>恭喜187****1541  获得 <span>小天鹅洗衣机</span></li>
+                    <li>恭喜187****1541  获得 <span>400元现金券</span></li>
+                    <li>恭喜187****1541  获得 <span>1000积分</span></li>
+                    <li>恭喜187****1541  获得 <span>小天鹅洗衣机</span></li>
+                    <li>恭喜187****1541  获得 <span>小天鹅洗衣机</span></li>
+                    <li>恭喜187****1541  获得 <span>小天鹅机</span></li>
+                </ul>
+            </div>
+           
+            <a href="javascript:void(0)" class='myPrize'>我的中奖消息>></a>
+        </div>
+        <p class="copyright">本活动最终解释权归店商互联所有<br>官方客服电话：400-9555-365</p>
+    </div>
+    <script type="text/javascript">
+        // 文字上滚
+        function rollUp(obj) {          
+            $(obj).find("ul:first").animate({marginTop: "-0.64rem"}, 1000,'linear',
+                function () {
+                $(this).css({ marginTop: "0" }).find("li:first").appendTo(this);                
+            });
+        }
+
+        $(function(){
+            setInterval('rollUp(".ulBox")', 2000); 
+
+            // 闪灯
+            var num = 0;
+            setInterval(function(){ 
+                num++;
+                ( num%2==0 ) ? ( $('.Box').addClass("on") ) : ( $('.Box').removeClass('on') );
+            },500);       
+        });
+
+        var lottery={
+            index:-1,    //当前转动到哪个位置，起点位置
+            count:0,    //总共有多少个位置
+            timer:0,    //setTimeout的ID，用clearTimeout清除
+            speed:20,    //初始转动速度
+            times:0,    //转动次数
+            cycle:50,    //转动基本次数：即至少需要转动多少次再进入抽奖环节
+            prize:-1,    //中奖位置
+            init:function(id){
+                if ($("#"+id).find(".lottery-unit").length>0) {
+                    $lottery = $("#"+id);
+                    $units = $lottery.find(".lottery-unit");
+                    this.obj = $lottery;
+                    this.count = $units.length;
+                    $lottery.find(".lottery-unit-"+this.index).addClass("active");
+                };
+            },
+            roll:function(){
+                var index = this.index;
+                var count = this.count;
+                var lottery = this.obj;
+
+                $(lottery).find(".lottery-unit-"+index).removeClass("active").siblings(".lottery-unit").removeClass("turn");
+                index += 1;
+                if (index>count-1) {
+                    index = 0;
+                };
+                $(lottery).find(".lottery-unit-"+index).addClass("active").siblings(".lottery-unit").addClass("turn");
+                this.index=index;
+                return false;
+                alert(1)
+            },
+            stop:function(index){
+                this.prize=index;
+                return false;
+            }
+        };
+        
+
+        function rolls(){
+            lottery.times += 1;
+            lottery.roll();//转动过程调用的是lottery的roll方法，这里是第一次调用初始化
+            if (lottery.times > lottery.cycle+10 && lottery.prize==lottery.index) {
+                clearTimeout(lottery.timer);
+                $(".bagin").removeClass("turn");//转盘停止转动时，点击按钮变亮
+                lottery.prize=-1;
+                lottery.times=0;
+                click=false;
+            }else{
+                if (lottery.times<lottery.cycle) {
+                    lottery.speed -= 10;
+                }else if(lottery.times==lottery.cycle) {
+                    var index = Math.random()*(lottery.count)|0;
+                    lottery.prize = index; //中奖位置    
+                }else{
+                    if (lottery.times > lottery.cycle+10 && ((lottery.prize==0 && lottery.index==7) || lottery.prize==lottery.index+1)) {
+                        lottery.speed += 110;
+                    }else{
+                        lottery.speed += 20;
+                    }
+                }
+                if (lottery.speed<40) {
+                    lottery.speed=40;
+                };
+                lottery.timer = setTimeout(rolls,lottery.speed);//循环调用
+            }
+            return false;
+            
+        }
+
+        var click=false;
+
+        window.onload=function(){
+            lottery.init('lottery');
+            var playNum = 2;  //抽奖次数,默认为1，值由后台传入
+            $(".play-num").html(playNum);  //设置抽奖次数
+            if(playNum <= 0) {
+                $(".bagin img").attr('src','images/icon-drawbtn-grey.png');
+            }
+            $("#lottery .bagin").click(function(){
+                var $this = $(this);
+                $this.addClass("turn");
+                if (click) {//click控制一次抽奖过程中不能重复点击抽奖按钮，后面的点击不响应
+                    return false;
+                }else{
+                    if(playNum <= 0) {  //当抽奖次数为0的时候执行
+                        $('.play-num').html(0);
+                        layer.msg("没有抽奖次数了");
+                        return false;
+                    }else { //还有次数就执行
+                        playNum = playNum - 1; //执行转盘了则次数减1
+
+                        if(playNum <= 0) {
+                            playNum = 0;
+
+                            $this.find('img').attr('src','images/icon-drawbtn-grey.png')
+                        }
+                        $('.play-num').html(playNum);
+                    }
+                    lottery.speed=100;
+                    rolls();    //转圈过程不响应click事件，会将click置为false
+                    click=true; //一次抽奖完成后，设置click为true，可继续抽奖
+                    return false;
+                }
+            });
+        };
+    </script>
+</body>
+</html>

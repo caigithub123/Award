@@ -1,0 +1,211 @@
+@charset "utf-8";
+@import url("reset.css");
+
+html,body{ 
+	max-width: 750px; 
+	min-width: 320px;  
+	margin: 0 auto;
+}
+
+/*==================index.html====================*/
+.index-main{
+	width:100%;
+	background: url(../images/bg.png) no-repeat;
+	background-size: 100% 100%;
+	min-height: 8rem;
+}
+.index-top{
+	position:relative;
+}
+.index-top img{
+	width: 70%;
+	margin:0.6rem 0;
+	margin-left: 15%;
+
+}
+.index-top p{
+	width:2.7rem;
+	height:0.5rem;
+	padding-left: 0.4rem;
+	line-height: 0.5rem;
+	background: url(../images/cj_num_bg.png) no-repeat;
+	background-size: 100% 100%;
+	font-size: 0.2rem;
+	color: #fff;
+	margin:0 auto;
+	text-align: center;
+}
+.index-top p em{
+	color:#fffb9b;
+}
+.index-top a{
+	display: inline-block;
+	color: #fff;
+	font-size: 0.18rem;
+	position: absolute;
+	bottom: 0;
+	right: 0.3rem;
+}
+
+.index-dial{
+	border-radius: 10px;
+	width:6.7rem;
+	margin:0 auto;
+	min-height:100px;
+	margin-top: 10px;
+	background-color: #e22f3d;
+	padding:0.2rem 0.1rem 0;
+}
+.Box{
+	width:6.7rem;
+	height:6rem;
+	background: url(../images/light_bg1.png) no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+	padding: .05rem 0;
+}
+.on{
+	background: url(../images/light_bg2.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.dial-box{
+	background-color: #961d19;
+	border-radius: 10px;
+	width:5.8rem;
+	height:5.12rem;
+	margin:0.3rem auto;
+
+}
+.dial-box li{
+	width:1.9rem; 
+	height:1.65rem;
+	float: left;
+	/*background: url(../images/turn_bg.png) no-repeat;*/
+	/*background-size: 100% 100% ;*/
+	text-align: center;
+	position: relative;
+	margin:0.04rem 0 0 0.02rem;
+}
+.dial-box li .imgBox{
+	z-index: 100;
+	position: relative;
+	
+}
+.dial-box li em{
+	width:80%;
+	display: inline-block;
+	font-size: 0.2rem;
+	color: #fff;
+	position: absolute;
+	top:0.4rem;
+	left:0;
+}
+.dial-box li img{
+	max-width:65%;	
+}
+.dial-box li p{
+	width:100%;
+	display: block;
+	color: #d3433e;
+	position: absolute;
+	bottom: -0.16rem;
+	font-size: 0.24rem;
+}
+.dial-box .bagin img{
+	width: 100%;
+	max-width: 100%;
+	height:100%;
+}
+
+.dial-box li.lottery-unit{
+	background: url(../images/turn_bg.png) no-repeat;
+	background-size: 100% 100%;
+}
+.dial-box li.lottery-unit.active {
+    background: url(../images/turn.png) no-repeat;
+    background-size: 100% 100%;
+}
+.dial-box li.turn .mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.3);
+    border-radius: .22rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 300;
+}
+
+/*#lottery .active .mask{display:block;}
+#lottery .active .gray_bg{display: block;}
+.mask{
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    background:url(../images/turn.png) no-repeat;
+    background-size: 100% 100%;
+    display:none;
+    z-index: 2;
+}
+
+.gray_bg{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.2);
+	position: absolute;
+	top:0;
+	left: 0;
+	display: none;
+}*/
+
+/*中奖用户*/
+.prizeUser{
+	margin:10px;
+	background: url(../images/prizebj.png) no-repeat;
+	background-size: 100% 100%;
+	padding:20px 30px 10px 30px;
+	
+}
+.prizeUser p{
+	font-size: 0.3rem;
+	color: #d3433e;
+	text-align: center;
+	height:0.8rem;
+	
+}
+.ulBox{
+	height:3.2rem;
+	overflow: hidden;
+}
+
+.prizeUser ul li{
+	font-size: 0.28rem;
+	color: #c7ab11;
+	padding: 0.12rem 0.08rem;
+	border-bottom: 1px solid #c7ab11;
+
+}
+.prizeUser ul li span{
+	color: #d3433e;
+	float: right;
+	text-align: left;
+}
+.myPrize{
+	display: inline-block;
+	font-size: 0.28rem;
+	color: #d3433e;
+	width:100%;
+	text-align: center;
+	height:0.8rem;
+	line-height: 0.8rem;
+}
+.copyright{
+	font-size: 0.24rem;
+	color: #f8d3d2;
+	text-align: center;
+	padding-bottom: 40px;
+	margin-top: 0.15rem;
+}
